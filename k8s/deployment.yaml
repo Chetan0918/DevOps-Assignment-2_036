@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ticket-app-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ticket-app
+  template:
+    metadata:
+      labels:
+        app: ticket-app
+    spec:
+      containers:
+        - name: ticket-app
+          image: YOUR_DOCKERHUB_USERNAME/devops-assignment-2:latest
+          ports:
+            - containerPort: 5000
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "256Mi"

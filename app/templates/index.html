@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ticket Booking - Demo</title>
+  <style>
+    body{font-family: Arial, sans-serif; margin:40px}
+    .flash{padding:10px;border-radius:4px;margin-bottom:10px}
+    .success{background:#e6ffed;border:1px solid #b7f0c8}
+    .error{background:#ffe6e6;border:1px solid #f0b7b7}
+  </style>
+</head>
+<body>
+  <h1>Ticket Booking (Demo)</h1>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, msg in messages %}
+        <div class="flash {{ category }}">{{ msg }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+  <form method="post">
+    <label>Name: <input type="text" name="name"></label><br><br>
+    <label>Seats: <input type="number" name="seats" min="1"></label><br><br>
+    <button type="submit">Book</button>
+  </form>
+  <h2>Bookings</h2>
+  <ul>
+    {% for b in bookings %}
+      <li>{{ b.name }} — {{ b.seats }} seats</li>
+    {% else %}
+      <li>No bookings yet</li>
+    {% endfor %}
+  </ul>
+</body>
+</html>
